@@ -1,11 +1,24 @@
-// import { Column, Entity } from "typeorm";
-// //import { BaseEntity } from "./BaseEntity";
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { v4 as uuid } from "uuid";
 
-// @Entity("permissions")
-// export class Permission extends BaseEntity {
-//   @Column()
-//   name: string;
+@Entity("permissions")
+export class Permission {
 
-//   @Column()
-//   description: string;
-// }
+    @PrimaryColumn()
+    id: string;
+
+    @Column()
+    name: string;
+
+    @Column()
+    description: string;
+
+    @CreateDateColumn()
+    created_at: Date;
+
+    constructor() {
+        if (!this.id) {
+            this.id = uuid();
+        }
+    }
+}

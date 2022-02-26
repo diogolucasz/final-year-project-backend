@@ -1,20 +1,33 @@
-// import { Column, Entity, JoinTable, ManyToMany } from "typeorm";
-// import { BaseEntity } from "./BaseEntity";
-// import { Permission } from "./Permission";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
+import { Permission } from "./Permission";
+import { v4 as uuid } from "uuid";
 
-// @Entity("roles")
-// export class Role extends BaseEntity {
-//   @Column()
-//   name: string;
+@Entity("roles")
+export class Role {
 
-//   @Column()
-//   description: string;
+    @PrimaryColumn()
+    id: string;
 
-//   @ManyToMany(() => Permission)
-//   @JoinTable({
-//     name: "permissions_roles",
-//     joinColumns: [{ name: "role_id" }],
-//     inverseJoinColumns: [{ name: "permission_id" }],
-//   })
-//   permissions: Permission[];
-// }
+    @Column()
+    name: string;
+
+    @Column()
+    description: string;
+
+    @ManyToMany(() => Permission)
+    @JoinTable({
+        name: "permissions_roles",
+        joinColumns: [{ name: "role_id" }],
+        inverseJoinColumns: [{ name: "permission_id" }],
+    })
+    permissions: Permission[];
+
+    @CreateDateColumn()
+    created_at: Date;
+
+    constructor() {
+        if (!this.id) {
+            this.id = uuid();
+        }
+    }
+}
