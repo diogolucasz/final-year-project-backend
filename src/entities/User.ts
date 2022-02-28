@@ -2,11 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   PrimaryColumn,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Course } from "./Course";
 import { Permission } from "./Permission";
 import { Role } from "./Role";
 
@@ -30,6 +33,13 @@ export class User {
 
   @Column()
   password: string;
+
+  @ManyToOne(() => Course)
+  @JoinColumn({name: "course_id"})
+  course: Course;
+
+  @Column()
+  course_id: string;
   
   @ManyToMany(() => Role)
   @JoinTable({

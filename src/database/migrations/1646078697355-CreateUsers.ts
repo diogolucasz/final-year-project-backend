@@ -1,6 +1,6 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateUser1645828466243 implements MigrationInterface {
+export class CreateUsers1646078697355 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
@@ -11,6 +11,14 @@ export class CreateUser1645828466243 implements MigrationInterface {
                         name: "id",
                         type: "uuid",
                         isPrimary: true,
+                    },
+                    {
+                        name: "name",
+                        type: "varchar",
+                    },
+                    {
+                        name: "surname",
+                        type: "varchar",
                     },
                     {
                         name: "username",
@@ -26,28 +34,13 @@ export class CreateUser1645828466243 implements MigrationInterface {
                     },              
                     {
                         name: "course_id",
-                        type: "uuid"
+                        type: "uuid",
+                        
                     },
-                    {
-                        name: "year",
-                        type: "numeric"
-                    },
-                    {
-                        name: "name",
-                        type: "varchar",
-                    },
-                    {
-                        name: "surname",
-                        type: "varchar",
-                    },
-                    {
-                        name: "biography",
-                        type: "varchar",
-                    },
-                    {
-                        name: "phone",
-                        type: "varchar",
-                    },
+                    // {
+                    //     name: "year",
+                    //     type: "numeric",
+                    // },
                     {
                         name: "created_at",
                         type: "timestamp",
@@ -59,7 +52,7 @@ export class CreateUser1645828466243 implements MigrationInterface {
                         name: "FK_Course",
                         referencedTableName: "courses",
                         referencedColumnNames: ["id"],
-                        columnNames: ["course_id"]
+                        columnNames: ["course_id"],
                     }
                 ]
             })
