@@ -7,7 +7,7 @@ export class CreateUserUseCase {
 
     async execute({ name, surname, username, email, password, course_id }: ICreateUserDTO): Promise<Error | User> {
 
-        const existUser = await UserRepository().findOne({ username });
+        const existUser = await UserRepository().findOne({ email });
 
         if (existUser) {
             return new Error("User already exists");
