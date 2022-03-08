@@ -1,7 +1,10 @@
 import { UserRepository } from "../../repositories";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken"
-import { User } from "../../entities/User";
+import { User } from "../../modules/users/entities/User";
+import { AppError } from "../../errors/AppError";
+import auth from "../../config/auth";
+import { getRepository } from "typeorm";
 
 interface IRequest {
     email: string,
@@ -20,21 +23,23 @@ export class CreateSessionUseCase {
 
     async execute({ email, password }: IRequest): Promise<IResponse> {
 
-        const user = await UserRepository().findOne({ email });
+        const userRepository = getRepository(User);
+
+        const user = await userRepository.findOne({ email });
 
         if (!user) {
-            throw new Error("O e-mail ou a password estão incorretos.")
+            throw new AppError("O e-mail ou a password estão incorretos.")
         }
 
         const passwordMatch = await compare(password, user.password)
 
         if (!passwordMatch) {
-            throw new Error("O e-mail ou a password estão incorretos.")
-        }
+            throw new AppError("O e-mail ou a password estão incorretos.")
+        };
 
-        const token = sign({}, "672efd0ed3d534c72091f142f6f6d494", {
+        const token = sign({}, auth.secret_token, {
             subject: user.id,
-            expiresIn: '1d'
+            expiresIn: auth.experies_in_token,
         });
 
         const tokenReturn: IResponse = {
