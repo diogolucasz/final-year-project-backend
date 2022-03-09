@@ -1,22 +1,30 @@
-import { Repository, EntityRepository } from "typeorm";
-//import { UserRepository } from "../../../repositories";
+import { EntityRepository, getRepository, Repository } from "typeorm";
 import { User } from "../entities/User";
+import { IUsersRepository } from "./IUsersRepository";
 
 
 @EntityRepository(User)
-export class UserRepository extends Repository<User> {
+export class UserRepository implements IUsersRepository {
 
-	users: User[] = [];
+    private repository: Repository<User>;
 
-	async findByEmail(email: string): Promise<User> {
+    constructor() {
+        this.repository = getRepository(User)
+    }
+    
+    async findByEmail(email: string): Promise<User> {
+        
+        const user = await this.repository.findOne({ email });
+        
+        return user;
+    }
+    
+    async save(user: User): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
 
-		const userRepository = UserRepository()
-
-		const user = await userRepository.findByEmail(email);
-		
-		//this.users.find((user) => user.email === email);
-
-		return user;
-	}
+    async create(user: User): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
 }
 

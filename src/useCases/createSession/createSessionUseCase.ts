@@ -1,10 +1,9 @@
-import { UserRepository } from "../../repositories";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken"
-import { User } from "../../modules/users/entities/User";
 import { AppError } from "../../errors/AppError";
 import auth from "../../config/auth";
-import { getRepository } from "typeorm";
+import { IUsersRepository } from "../../modules/users/repositories/IUsersRepository";
+import { IUsersTokensRepository } from "../../modules/users/repositories/UserTokensRepository";
 
 interface IRequest {
     email: string,
@@ -21,11 +20,16 @@ interface IResponse {
 
 export class CreateSessionUseCase {
 
+    constructor(
+        private usersRepository: IUsersRepository,
+        private usersTokensRepository: IUsersTokensRepository,
+    ) { }
+
     async execute({ email, password }: IRequest): Promise<IResponse> {
 
-        const userRepository = getRepository(User);
+        const user = await this.usersRepository.findByEmail(email);
 
-        const user = await userRepository.findOne({ email });
+        const { expires_in_token, secret_refresh_token, secret_token, expires_in_refresh_token } = auth;
 
         if (!user) {
             throw new AppError("O e-mail ou a password estão incorretos.")
@@ -37,10 +41,21 @@ export class CreateSessionUseCase {
             throw new AppError("O e-mail ou a password estão incorretos.")
         };
 
-        const token = sign({}, auth.secret_token, {
+        const token = sign({}, secret_token, {
             subject: user.id,
-            expiresIn: auth.experies_in_token,
+            expiresIn: expires_in_token,
         });
+
+        const refresh_token = sign({ email }, secret_refresh_token, {
+            subject: user.id,
+            expiresIn: expires_in_refresh_token,
+        })
+
+        await this.usersTokensRepository.create({
+            user_id: user.id,
+            refresh_token,
+            expires_date: expires_in_token,
+        })
 
         const tokenReturn: IResponse = {
             user: {
