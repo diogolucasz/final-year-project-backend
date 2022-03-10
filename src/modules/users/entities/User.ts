@@ -17,7 +17,7 @@ import { Role } from "../../../entities/Role";
 export class User {
 
   @PrimaryColumn()
-  id: string;
+  id?: string;
 
   @Column()
   username: string;
@@ -36,10 +36,10 @@ export class User {
 
   @ManyToOne(() => Course)
   @JoinColumn({name: "course_id"})
-  course: Course;
+  course?: Course;
 
   @Column()
-  course_id: string;
+  course_id?: string;
   
   @ManyToMany(() => Role)
   @JoinTable({
@@ -47,7 +47,7 @@ export class User {
     joinColumns: [{ name: "user_id" }],
     inverseJoinColumns: [{ name: "role_id" }],
   })
-  roles: Role[];
+  roles?: Role[];
   
   @ManyToMany(() => Permission)
   @JoinTable({
@@ -55,10 +55,10 @@ export class User {
     joinColumns: [{ name: "user_id" }],
     inverseJoinColumns: [{ name: "permission_id" }],
   })
-  permissions: Permission[];
+  permissions?: Permission[];
   
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   constructor() {
     if (!this.id) {

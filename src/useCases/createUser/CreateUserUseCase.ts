@@ -11,7 +11,7 @@ export class CreateUserUseCase {
         private usersTokensRepository: IUsersTokensRepository,
     ) { }
 
-    async execute({ name, surname, username, email, password, course_id }: ICreateUserDTO): Promise<Error | User> {
+    async execute({ name, surname, username, email, password, course_id }: ICreateUserDTO): Promise< Error | User> {
 
         const existUser = await this.usersRepository.findByEmail(email);
 
@@ -28,8 +28,8 @@ export class CreateUserUseCase {
             email,
             course_id,
             password: passwordHashed,
-            course,
-            created_at, id, permissions, roles
+            //course,
+            //created_at, id, permissions, roles
         });
 
         await this.usersRepository.save(user);

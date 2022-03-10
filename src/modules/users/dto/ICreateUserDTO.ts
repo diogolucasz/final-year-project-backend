@@ -6,8 +6,9 @@ export interface ICreateUserDTO {
     email: string;
     course_id: string;
     course?: string;
-    id,permissions,
-    roles?
-    created_at?:Date
+    id?: string,
+    permissions?: string[],
+    roles?: string[],
+    created_at?: Date
 
 }

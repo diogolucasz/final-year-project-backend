@@ -3,4 +3,5 @@ export default {
     expires_in_token: "10m",
     secret_refresh_token: "877e3a96ed96dbb4a8a3ba38c442c9d5",
     expires_in_refresh_token: "30d",
+    expires_refresh_token_days: 30
 }
