@@ -6,7 +6,7 @@
     "password": "postgres",
     "database": "finalproject",
     "entities": [
-        "./src/entities/*.ts"
+        "./src/modules/**/entities/*.ts"
     ],
     "migrations": [
         "./src/database/migrations/*.ts"

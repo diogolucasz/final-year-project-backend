@@ -1,8 +1,7 @@
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken"
-//import { AppError } from "../../errors/AppError";
 import auth from "../../config/auth";
-import { IUsersRepository } from "../../modules/users/repositories/IUsersRepository";
+import { IUsersRepository } from "../../modules/users/dto/IUsersRepository";
 import { IUsersTokensRepository } from "../../modules/users/repositories/UserTokensRepository";
 import { AppError } from "../../shared/errors/AppError";
 import { IDateProvider } from "../../shared/providers/DataProvider/IDateProvider";

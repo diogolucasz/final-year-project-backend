@@ -1,22 +1,22 @@
 import { ICreateUserDTO } from "../../modules/users/dto/ICreateUserDTO";
 import { hash } from "bcryptjs";
 import { User } from "../../modules/users/entities/User";
-import { IUsersRepository } from "../../modules/users/repositories/IUsersRepository";
-import { IUsersTokensRepository } from "../../modules/users/repositories/UserTokensRepository";
+import { IUsersRepository } from "../../modules/users/dto/IUsersRepository";
+//import { IUsersTokensRepository } from "../../modules/users/repositories/UserTokensRepository";
+import { AppError } from "../../shared/errors/AppError";
 
 export class CreateUserUseCase {
 
     constructor(
         private usersRepository: IUsersRepository,
-        private usersTokensRepository: IUsersTokensRepository,
     ) { }
 
-    async execute({ name, surname, username, email, password, course_id }: ICreateUserDTO): Promise< Error | User> {
+    async execute({ name, surname, username, email, password, course_id }: ICreateUserDTO): Promise<void> {
 
-        const existUser = await this.usersRepository.findByEmail(email);
+        const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
-        if (existUser) {
-            return new Error("User already exists");
+        if (userAlreadyExists) {
+            throw new Error("User already exists");
         }
 
         const passwordHashed = await hash(password, 8)
@@ -26,15 +26,13 @@ export class CreateUserUseCase {
             surname,
             username,
             email,
-            course_id,
             password: passwordHashed,
-            //course,
-            //created_at, id, permissions, roles
+            course_id,
         });
 
         await this.usersRepository.save(user);
 
-        return user;
+        //return user;
     }
 }
 

@@ -1,6 +1,7 @@
 import { getRepository, Repository } from "typeorm";
+import { ICreateUserTokenDTO } from "../../modules/users/dto/ICreateUserTokenDTO";
 import { UserTokens } from "../../modules/users/entities/UserTokens";
-import { ICreateUserTokenDTO } from "../../repositories/ICreateUserTokenDTO";
+
 import { IUsersTokensRepository } from "../../modules/users/repositories/UserTokensRepository";
 
 export class UsersTokensRepository implements IUsersTokensRepository{
