@@ -1,5 +1,5 @@
 import { getRepository } from "typeorm";
-import { Course } from "../../entities/Course";
+import { Course } from "../../modules/users/entities/Course";
 
 interface CourseRequest {
     name: string;

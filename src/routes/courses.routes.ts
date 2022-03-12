@@ -1,10 +1,9 @@
 import { Router } from 'express';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
-import { CreateCourseController } from '../useCases/createCourse/createCourseController';
+import { createCourseController } from '../useCases/createCourse';
 
 export const coursesRoutes = Router();
 
-const createCourseController = new CreateCourseController();
 
-coursesRoutes.use(ensureAuthenticated)
+//coursesRoutes.use(ensureAuthenticated)
 coursesRoutes.post("/", createCourseController.handle);

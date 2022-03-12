@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { CreateSessionController } from "../useCases/createSession/createSessionController";
+import { createSessionController } from "../useCases/createSession";
 
 export const sessionsRoutes = Router();
 
-const createSessionController = new CreateSessionController();
+//const createSessionController = new CreateSessionController();
 
 sessionsRoutes.post("/sessions", createSessionController.handle)

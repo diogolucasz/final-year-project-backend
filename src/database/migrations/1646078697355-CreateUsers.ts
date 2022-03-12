@@ -37,10 +37,6 @@ export class CreateUsers1646078697355 implements MigrationInterface {
                         type: "uuid",
                         
                     },
-                    // {
-                    //     name: "year",
-                    //     type: "numeric",
-                    // },
                     {
                         name: "created_at",
                         type: "timestamp",
