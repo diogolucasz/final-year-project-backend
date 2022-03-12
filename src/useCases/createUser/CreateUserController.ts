@@ -1,6 +1,6 @@
-import { CreateUserUseCase } from "./CreateUserUseCase";
+//import { CreateUserUseCase } from "./CreateUserUseCase";
 import { Request, Response } from "express";
-import { UserRepository } from "../../modules/users/repositories/UsersRepository";
+import { CreateUserUseCase } from "./CreateUserUseCase";
 
 export class CreateUserController {
 

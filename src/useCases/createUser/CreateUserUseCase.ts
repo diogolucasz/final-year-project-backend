@@ -1,9 +1,6 @@
 import { ICreateUserDTO } from "../../modules/users/dto/ICreateUserDTO";
 import { hash } from "bcryptjs";
-import { User } from "../../modules/users/entities/User";
 import { IUsersRepository } from "../../modules/users/dto/IUsersRepository";
-//import { IUsersTokensRepository } from "../../modules/users/repositories/UserTokensRepository";
-import { AppError } from "../../shared/errors/AppError";
 
 export class CreateUserUseCase {
 
@@ -32,7 +29,6 @@ export class CreateUserUseCase {
 
         await this.usersRepository.save(user);
 
-        //return user;
     }
 }
 
