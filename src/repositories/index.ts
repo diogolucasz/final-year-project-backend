@@ -1,7 +1,7 @@
 import { Role } from "../modules/users/entities/Role";
 import { getRepository } from "typeorm";
 import { Permission } from "../modules/users/entities/Permission";
-import { Course } from "../modules/users/entities/Course";
+import { Course } from "../modules/courses/entities/Course";
 import { User } from "../modules/users/entities/User";
 
 export const UserRepository = () => {

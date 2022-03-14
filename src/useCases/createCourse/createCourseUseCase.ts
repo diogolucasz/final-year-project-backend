@@ -1,5 +1,6 @@
 import { getRepository } from "typeorm";
-import { Course } from "../../modules/users/entities/Course";
+import { ICoursesRepository } from "../../modules/courses/ICourseRepository";
+import { Course } from "../../modules/courses/entities/Course";
 
 interface CourseRequest {
     name: string;
@@ -8,16 +9,22 @@ interface CourseRequest {
 
 export class CreateCourseUseCase {
 
+    constructor(
+        private coursesRepository: ICoursesRepository,
+    ) { }
+
+    //private usersRepository: IUsersRepository,
+
     async execute({ name, description }: CourseRequest) {
 
-        const courseRepository = getRepository(Course)
+        //const courseRepository = getRepository(Course)
 
-        const course = courseRepository.create({
+        const course = this.coursesRepository.create({
             name,
             description,
         });
 
-        await courseRepository.save(course);
+        await this.coursesRepository.save(await course);
 
         return course;
     }

@@ -1,8 +1,13 @@
 import { Router } from "express";
-import { createSessionController } from "../useCases/createSession";
+import createSessionController from "../useCases/createSession";
+import refreshTokenController from "../useCases/refreshToken";
 
 export const sessionsRoutes = Router();
 
-//const createSessionController = new CreateSessionController();
+sessionsRoutes.post("/sessions", (request, response) => {
+    return createSessionController().handle(request, response)
+});
 
-sessionsRoutes.post("/sessions", createSessionController.handle)
+sessionsRoutes.post("/refresh-token", (request, response) => {
+    return refreshTokenController().handle(request, response)
+});

@@ -1,8 +1,18 @@
 
+import { CoursesRepository } from "../../modules/courses/repositories/CourseRepository";
 import { CreateCourseController } from "./createCourseController";
 import { CreateCourseUseCase } from "./createCourseUseCase";
 
+export default (): CreateCourseController => {
+    const courseRepository = new CoursesRepository();
 
-export const createCourseUseCase = new CreateCourseUseCase()
+    const createCourseUseCase = new CreateCourseUseCase(
+        courseRepository
+    )
 
-export const createCourseController = new CreateCourseController()
+    const createCourseController = new CreateCourseController(
+        createCourseUseCase
+    )
+
+    return createCourseController;
+}

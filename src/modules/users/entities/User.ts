@@ -9,7 +9,7 @@ import {
 	PrimaryColumn,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
-import { Course } from "./Course";
+import { Course } from "../../courses/entities/Course";
 import { Permission } from "./Permission";
 import { Role } from "./Role";
 

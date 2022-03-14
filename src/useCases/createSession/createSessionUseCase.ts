@@ -2,7 +2,7 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken"
 import auth from "../../config/auth";
 import { IUsersRepository } from "../../modules/users/dto/IUsersRepository";
-import { IUsersTokensRepository } from "../../modules/users/repositories/UserTokensRepository";
+import { IUsersTokensRepository } from "../../modules/users/dto/IUserTokensRepository";
 import { AppError } from "../../shared/errors/AppError";
 import { IDateProvider } from "../../shared/providers/DataProvider/IDateProvider";
 

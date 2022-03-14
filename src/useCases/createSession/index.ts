@@ -4,17 +4,21 @@ import { UsersTokensRepository } from "../../modules/users/repositories/UsersTok
 import { CreateSessionController } from "./createSessionController";
 import { CreateSessionUseCase } from "./createSessionUseCase";
 
+export default (): CreateSessionController => {
 
-const usersRepository = new UserRepository();
-const usersTokensRepository = new UsersTokensRepository()
-const dayjsDateProvider = new DayjsDateProvider()
+    const usersRepository = new UserRepository();
+    const usersTokensRepository = new UsersTokensRepository()
+    const dayjsDateProvider = new DayjsDateProvider()
 
-export const createSessionUseCase = new CreateSessionUseCase(
-    usersRepository, 
-    usersTokensRepository, 
-    dayjsDateProvider
-)
+    const createSessionUseCase = new CreateSessionUseCase(
+        usersRepository,
+        usersTokensRepository,
+        dayjsDateProvider
+    )
 
-export const createSessionController = new CreateSessionController(
-    createSessionUseCase
-)
+    const createSessionController = new CreateSessionController(
+        createSessionUseCase
+    )
+
+    return createSessionController;
+}
