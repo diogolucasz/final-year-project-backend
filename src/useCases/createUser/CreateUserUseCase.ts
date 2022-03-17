@@ -1,6 +1,7 @@
 import { ICreateUserDTO } from "../../modules/users/dto/ICreateUserDTO";
 import { hash } from "bcryptjs";
 import { IUsersRepository } from "../../modules/users/dto/IUsersRepository";
+import { AppError } from "../../shared/errors/AppError";
 
 export class CreateUserUseCase {
 
@@ -13,7 +14,7 @@ export class CreateUserUseCase {
         const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
         if (userAlreadyExists) {
-            throw new Error("User already exists");
+            throw new AppError("User already exists");
         }
 
         const passwordHashed = await hash(password, 8)
@@ -23,8 +24,8 @@ export class CreateUserUseCase {
             surname,
             username,
             email,
-            password: passwordHashed,
             course_id,
+            password: passwordHashed,
         });
 
         await this.usersRepository.save(user);
