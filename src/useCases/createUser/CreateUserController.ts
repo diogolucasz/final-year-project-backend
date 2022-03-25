@@ -12,8 +12,6 @@ export class CreateUserController {
 
         const { name, surname, email, username, password, course_id } = request.body;
 
-        //const createUserUseCase = new CreateUserUseCase(new UserRepository() as void);
-
         const user = await this.createUserUseCase.execute({
             name,
             surname,
