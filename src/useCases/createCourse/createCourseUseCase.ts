@@ -1,6 +1,5 @@
-import { getRepository } from "typeorm";
-import { ICoursesRepository } from "../../modules/courses/ICourseRepository";
-import { Course } from "../../modules/courses/entities/Course";
+import { ICoursesRepository } from "../../modules/dto/ICourseRepository";
+import { AppError } from "../../shared/errors/AppError";
 
 interface CourseRequest {
     name: string;
@@ -13,11 +12,13 @@ export class CreateCourseUseCase {
         private coursesRepository: ICoursesRepository,
     ) { }
 
-    //private usersRepository: IUsersRepository,
-
     async execute({ name, description }: CourseRequest) {
 
-        //const courseRepository = getRepository(Course)
+        const courseAlreadyExists = await this.coursesRepository.findByName(name);
+
+        if (courseAlreadyExists) {
+            throw new AppError(`Course ${name} already exists.`)
+        }
 
         const course = this.coursesRepository.create({
             name,

@@ -1,8 +1,8 @@
 import { EntityRepository, getRepository, Repository } from "typeorm";
 import { Course } from "../entities/Course";
 
-import { ICoursesRepository } from "../ICourseRepository";
-import { ICreateCourseDTO } from "../ICreateCourseDTO";
+import { ICoursesRepository } from "../../dto/ICourseRepository";
+import { ICreateCourseDTO } from "../../dto/ICreateCourseDTO";
 
 
 
@@ -13,6 +13,15 @@ export class CoursesRepository implements ICoursesRepository {
 
     constructor() {
         this.repository = getRepository(Course);
+    }
+
+    async findByName(name: string): Promise<Course> {
+
+        const course = await this.repository.findOne({ where:
+            { name }
+        });
+
+        return course;
     }
 
     async save(course: Course): Promise<Course> {

@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
 import { CreateSessionUseCase } from "./createSessionUseCase";
 
 export class CreateSessionController {
