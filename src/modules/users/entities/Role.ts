@@ -20,7 +20,7 @@ export class Role {
         joinColumns: [{ name: "role_id" }],
         inverseJoinColumns: [{ name: "permission_id" }],
     })
-    permissions: Permission[];
+    permission: Permission[];
 
     @CreateDateColumn()
     created_at: Date;
