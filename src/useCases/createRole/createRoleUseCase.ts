@@ -28,7 +28,7 @@ export class CreateRoleUserCase {
             permissions
         );
 
-        console.log(permissions)
+        console.log(permissions)s
 
         const role = this.rolesRepository.create({
             name,
