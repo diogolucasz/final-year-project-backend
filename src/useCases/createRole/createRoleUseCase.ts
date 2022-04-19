@@ -1,13 +1,13 @@
 import { IPermissionsRepository } from "../../modules/users/dto/IPermissionsRepository";
 import { IRolesRepository } from "../../modules/users/dto/IRolesRepository";
+import { Role } from "../../modules/users/entities/Role";
 import { AppError } from "../../shared/errors/AppError";
 
 interface IRequest {
     name: string;
     description: string;
-    permissions: string[],
+    permissions: string[];
 };
-
 
 export class CreateRoleUserCase {
 
@@ -16,7 +16,7 @@ export class CreateRoleUserCase {
         private permissionsRepository: IPermissionsRepository,
     ) { }
 
-    async execute({ name, description, permissions }: IRequest) {
+    async execute({ name, description, permissions }: IRequest): Promise<Role | Error> {
 
         const roleAlreadyExists = await this.rolesRepository.findByName(name);
 
@@ -24,20 +24,13 @@ export class CreateRoleUserCase {
             throw new AppError(`Role ${name} already exists.`)
         }
         
-        const permissionsExists = await this.permissionsRepository.findByIds(
-            permissions
-        );
+        const permissionsExists = await this.permissionsRepository.findByIds(permissions);
 
-        console.log(permissions)s
-
-        const role = this.rolesRepository.create({
+        const role = await this.rolesRepository.create({
             name,
             description,
-            //permissionsExists
-            ///permissions: permissionsExists,
+            permission: permissionsExists,
         });
-
-        await this.rolesRepository.save(await role);
 
         return role;
     }

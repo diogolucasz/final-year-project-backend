@@ -1,10 +1,7 @@
 import { EntityRepository, getRepository, Repository } from "typeorm";
+import { ICoursesRepository } from "../dto/ICourseRepository";
+import { ICreateCourseDTO } from "../dto/ICreateCourseDTO";
 import { Course } from "../entities/Course";
-
-import { ICoursesRepository } from "../../dto/ICourseRepository";
-import { ICreateCourseDTO } from "../../dto/ICreateCourseDTO";
-
-
 
 @EntityRepository(Course)
 export class CoursesRepository implements ICoursesRepository {

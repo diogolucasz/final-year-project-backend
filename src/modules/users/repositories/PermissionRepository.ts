@@ -16,10 +16,8 @@ export class PermissionRepository implements IPermissionsRepository {
 
         const permissions = await this.repository.findByIds(ids);
 
-        console.log(ids)
-        
         return permissions;
-    }
+      }
 
     async findByName(name: string): Promise<Permission> {
 
@@ -44,5 +42,4 @@ export class PermissionRepository implements IPermissionsRepository {
         return this.repository.save(data);
 
     }
-
 }

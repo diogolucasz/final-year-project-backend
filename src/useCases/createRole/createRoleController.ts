@@ -15,5 +15,6 @@ export class CreateRoleController {
         const role = await this.createRoleUserCase.execute({ name, description, permissions });
 
         return response.json(role);
+
     }
 }

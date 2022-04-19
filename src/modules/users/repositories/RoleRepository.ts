@@ -1,6 +1,7 @@
 import { EntityRepository, getRepository, Repository } from "typeorm";
 import { ICreateRoleDTO } from "../dto/ICreateRoleDTO";
-import { IRolesRepository } from "../dto/IRoleRepository";
+import { IRolesRepository } from "../dto/IRolesRepository";
+
 import { Role } from "../entities/Role";
 
 @EntityRepository(Role)
@@ -22,17 +23,18 @@ export class RoleRepository implements IRolesRepository {
         return user;
     }
 
-    async create(data: ICreateRoleDTO): Promise<Role> {
-        const permission = this.repository.create(data);
+    async create( {description,name,permission}: ICreateRoleDTO): Promise<Role | Error> {
 
-        await this.repository.save(permission);
+        const userToken = this.repository.create({
+            description,
+            name,
+            permission,
+        });
+        
+        console.log(userToken)
 
-        return permission;
-    }
-
-    async save(data: Role): Promise<Role> {
-
-        return this.repository.save(data);
-
+        await this.repository.save(userToken)
+        
+        return userToken
     }
 }
