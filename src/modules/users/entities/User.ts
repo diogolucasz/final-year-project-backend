@@ -10,7 +10,6 @@ import {
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Course } from "../../courses/entities/Course";
-import { Permission } from "./Permission";
 import { Role } from "./Role";
 
 @Entity("users")
@@ -43,9 +42,9 @@ export class User {
 
 	@ManyToMany(() => Role)
 	@JoinTable({
-	  name: "users_roles",
-	  joinColumns: [{ name: "user_id" }],
-	  inverseJoinColumns: [{ name: "role_id" }],
+		name: "users_roles",
+		joinColumns: [{ name: "user_id" }],
+		inverseJoinColumns: [{ name: "role_id" }],
 	})
 	roles: Role[];
 

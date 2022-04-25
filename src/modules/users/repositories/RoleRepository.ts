@@ -13,6 +13,13 @@ export class RoleRepository implements IRolesRepository {
         this.repository = getRepository(Role);
     }
 
+    async findByIds(ids: string[]): Promise<Role[]> {
+
+        const permissions = await this.repository.findByIds(ids);
+
+        return permissions;
+    }
+
     async findByName(name: string): Promise<Role> {
 
         const user = await this.repository.findOne({
@@ -25,16 +32,14 @@ export class RoleRepository implements IRolesRepository {
 
     async create( {description,name,permission}: ICreateRoleDTO): Promise<Role | Error> {
 
-        const userToken = this.repository.create({
+        const role = this.repository.create({
             description,
             name,
             permission,
         });
         
-        console.log(userToken)
-
-        await this.repository.save(userToken)
+        await this.repository.save(role)
         
-        return userToken
+        return role
     }
 }

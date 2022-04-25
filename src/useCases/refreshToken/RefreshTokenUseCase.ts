@@ -30,7 +30,7 @@ export class RefreshTokenUseCase {
         const userToken = await this.usersTokensRepository.findByUserId(user_id, token)
 
         if (!userToken) {
-            throw new AppError("Refresh token invalid")
+            throw new AppError(400, "Refresh token invalid")
         }
 
         await this.usersTokensRepository.deleteById(userToken.id)

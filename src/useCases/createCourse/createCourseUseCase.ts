@@ -1,4 +1,4 @@
-import { ICoursesRepository } from "../../modules/dto/ICourseRepository";
+import { ICoursesRepository } from "../../modules/courses/dto/ICourseRepository";
 import { AppError } from "../../shared/errors/AppError";
 
 interface CourseRequest {
@@ -17,7 +17,7 @@ export class CreateCourseUseCase {
         const courseAlreadyExists = await this.coursesRepository.findByName(name);
 
         if (courseAlreadyExists) {
-            throw new AppError(`Course ${name} already exists.`)
+            throw new AppError(400, `Course ${name} already exists.`)
         }
 
         const course = this.coursesRepository.create({

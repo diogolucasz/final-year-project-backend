@@ -1,9 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { decode } from "jsonwebtoken";
 import { getCustomRepository } from "typeorm";
+import { User } from "../modules/users/entities/User";
 import { UserRepository } from "../modules/users/repositories/UsersRepository";
+import { AppError } from "../shared/errors/AppError";
 
-async function tokenDecoder(request: Request) {
+async function tokenDecoder(request: Request): Promise<User | undefined> {
 
     const userRepository = getCustomRepository(UserRepository);
 
@@ -13,12 +15,27 @@ async function tokenDecoder(request: Request) {
 
     const payload = decode(token);
 
-    const user = await userRepository.findBySubject(payload.sub)
+    const user = await userRepository.findBySubject(payload?.sub)
+
+    return user;
 }
 
-function is(role: String[]) {
+export function is(role: String[]) {
 
-    const roleAuthorized = (request: Request, response: Response, next: NextFunction) => {
+    const roleAuthorized = async (request: Request, response: Response, next: NextFunction) => {
 
+        const user = await tokenDecoder(request)
+
+        const userRoles = user.roles.map(role => role.name)
+
+        const existingRoles = userRoles.some(r => role.includes(r))
+
+        if (existingRoles) {
+            return next();
+        }
+
+        throw new AppError(401 , "Not authorized");
     }
+
+    return roleAuthorized;
 }

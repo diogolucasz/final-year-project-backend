@@ -7,15 +7,12 @@ interface IPayload {
     sub: string;
 }
 
-export async function ensureAuthenticated(
-    request: Request,
-    response: Response,
-    next: NextFunction
-) {
+export async function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
+
     const authHeader = request.headers.authorization;
 
     if (!authHeader) {
-        throw new AppError("Token missing", 401);
+        throw new AppError(401, "Token missing");
     }
 
     const [, token] = authHeader.split(" ");
@@ -33,7 +30,8 @@ export async function ensureAuthenticated(
 
         next();
     } catch {
-        console.log(2)
-        throw new AppError("Invalid token!", 401);
+
+        throw new AppError(401, "Invalid token!");
+        
     }
 }

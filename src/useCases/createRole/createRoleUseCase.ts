@@ -21,9 +21,9 @@ export class CreateRoleUserCase {
         const roleAlreadyExists = await this.rolesRepository.findByName(name);
 
         if (roleAlreadyExists) {
-            throw new AppError(`Role ${name} already exists.`)
+            throw new AppError(400, `Role ${name} already exists.`)
         }
-        
+
         const permissionsExists = await this.permissionsRepository.findByIds(permissions);
 
         const role = await this.rolesRepository.create({

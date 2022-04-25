@@ -35,13 +35,13 @@ export class CreateSessionUseCase {
         const { expires_in_token, secret_refresh_token, secret_token, expires_in_refresh_token, expires_refresh_token_days } = auth;
 
         if (!user) {
-            throw new AppError("O e-mail ou a password estão incorretos.")
+            throw new AppError(400, "O e-mail ou a password estão incorretos.")
         }
 
         const passwordMatch = await compare(password, user.password)
 
         if (!passwordMatch) {
-            throw new AppError("O e-mail ou a password estão incorretos.")
+            throw new AppError(400, "O e-mail ou a password estão incorretos.")
         };
 
         const token = sign({}, secret_token, {

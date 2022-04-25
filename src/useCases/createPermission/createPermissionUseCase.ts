@@ -18,7 +18,7 @@ export class CreatePermissionUserCase {
         const permissionAlreadyExists = await this.permissionsRepository.findByName(name);
 
         if (permissionAlreadyExists) {
-            throw new AppError(`Permission ${name} already exists.`)
+            throw new AppError(400, `Permission ${name} already exists.`)
         }
 
         const permission = this.permissionsRepository.create({

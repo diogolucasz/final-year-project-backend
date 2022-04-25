@@ -2,6 +2,8 @@ import { EntityRepository, getRepository, Repository } from "typeorm";
 import { ICreateUserDTO } from "../dto/ICreateUserDTO";
 import { User } from "../entities/User";
 import { IUsersRepository } from "../dto/IUsersRepository";
+import { Role } from "../entities/Role";
+import { IAssignRole } from "../dto/IAssignRole";
 
 
 @EntityRepository(User)
@@ -13,10 +15,39 @@ export class UserRepository implements IUsersRepository {
         this.repository = getRepository(User);
     }
 
+    async assignRole({ id, roles }: IAssignRole) {
+
+        await this.repository
+            .createQueryBuilder()
+            .update()
+            .set({ roles })
+            .where("id = :id", { id })
+            .execute();
+
+    }
+
+    async findById(id: string): Promise<User> {
+
+        const user = await this.repository.findOne({
+            where:
+                { id }
+        });
+
+        return user;
+    }
+
+    async findBySubject(sub: string) {
+
+        const roles = await this.repository.findOne(sub, { relations: ['roles'] })
+
+        return roles;
+    }
+
     async findByEmail(email: string): Promise<User> {
 
-        const user = await this.repository.findOne({ where:
-            { email }
+        const user = await this.repository.findOne({
+            where:
+                { email }
         });
 
         return user;
