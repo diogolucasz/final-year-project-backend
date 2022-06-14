@@ -1,5 +1,5 @@
-import { IPermissionsRepository } from "../../modules/users/dto/IPermissionsRepository";
-import { AppError } from "../../shared/errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
+import { IPermissionsRepository } from "../../dto/IPermissionsRepository";
 
 interface IRequest {
     name: string;

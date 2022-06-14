@@ -1,5 +1,6 @@
-import { ICoursesRepository } from "../../modules/courses/dto/ICourseRepository";
-import { AppError } from "../../shared/errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
+import { ICoursesRepository } from "../../dto/ICourseRepository";
+
 
 interface CourseRequest {
     name: string;

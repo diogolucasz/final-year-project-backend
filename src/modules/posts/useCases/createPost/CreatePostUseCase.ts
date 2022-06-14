@@ -1,4 +1,7 @@
 import { Post } from "../../entities/Post";
+import { IPostsRepository } from "../../dto/IPostsRepository";
+import { AppError } from "../../../../shared/errors/AppError";
+import { IUsersRepository } from "../../../users/dto/IUsersRepository";
 
 
 interface IRequest {
@@ -9,10 +12,31 @@ interface IRequest {
 
 export class CreatePostUseCase {
 
+    constructor(
+        private postsRepository: IPostsRepository,
+        private usersRepository: IUsersRepository,
+    ) { }
+
     async execute({ message, user_id, subject }: IRequest): Promise<Post> {
 
-        //const { id } = request.user;
+        const user = await this.usersRepository.findById(user_id);
 
-        const post = await
+        if (!user) {
+            throw new AppError(400, `User does not exists`)
+        }
+
+        console.log(user)
+
+        const post = this.postsRepository.create({
+            user_id,
+            message,
+            subject
+        });
+
+        console.log(post)
+
+        await this.postsRepository.save(await post);
+
+        return post;
     }
 }

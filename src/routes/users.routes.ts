@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import createUserController from '../useCases/createUser';
-import createPermissionController from '../useCases/createPermission';
+import createPermissionController from '../modules/users/useCases/createPermission';
 import createRouteController from '../useCases/createRole';
 import assignRole from '../useCases/assignRole';
 

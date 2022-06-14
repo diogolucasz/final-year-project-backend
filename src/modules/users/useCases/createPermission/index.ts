@@ -1,5 +1,4 @@
-
-import { PermissionRepository } from "../../modules/users/repositories/PermissionRepository";
+import { PermissionRepository } from "../../repositories/PermissionRepository";
 import { CreatePermissionController } from "./createPermissionController";
 import { CreatePermissionUserCase } from "./createPermissionUseCase";
 

@@ -12,6 +12,7 @@ export class CoursesRepository implements ICoursesRepository {
         this.repository = getRepository(Course);
     }
 
+    //
     async findByName(name: string): Promise<Course> {
 
         const course = await this.repository.findOne({ where:
@@ -21,11 +22,13 @@ export class CoursesRepository implements ICoursesRepository {
         return course;
     }
 
+    //
     async save(course: Course): Promise<Course> {
 
         return this.repository.save(course);
     }
 
+    //
     async create(data: ICreateCourseDTO): Promise<Course> {
 
         const course = this.repository.create(data);

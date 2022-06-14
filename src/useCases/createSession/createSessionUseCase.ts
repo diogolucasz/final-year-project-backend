@@ -15,6 +15,7 @@ interface IResponse {
     user: {
         name: string,
         email: string,
+        id: string,
     },
     token: string;
     refresh_token: string;
@@ -65,7 +66,8 @@ export class CreateSessionUseCase {
         const tokenReturn: IResponse = {
             user: {
                 name: user.name,
-                email: user.email
+                email: user.email,
+                id: user.id,
             },
             token,
             refresh_token,

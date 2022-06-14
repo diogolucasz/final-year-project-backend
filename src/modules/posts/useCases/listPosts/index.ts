@@ -2,8 +2,6 @@ import { PostsRepository } from "../../repositories/PostRepository";
 import { ListPostsController } from "./ListPostController";
 import { ListPostsUseCase } from "./ListPostsUseCase";
 
-
-
 export default (): ListPostsController => {
     
     const postsRepository = new PostsRepository();

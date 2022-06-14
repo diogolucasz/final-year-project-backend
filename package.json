@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts ",
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts --files",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
   },
   "keywords": [],
@@ -24,11 +24,13 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
+    "cors": "^2.8.5",
     "eslint": "^8.9.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-import-resolver-typescript": "^2.5.0",

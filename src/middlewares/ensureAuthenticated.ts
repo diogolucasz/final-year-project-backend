@@ -7,7 +7,7 @@ interface IPayload {
     sub: string;
 }
 
-export async function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
+export async function ensureAuthenticated(request: Request | any, response: Response, next: NextFunction) {
 
     const authHeader = request.headers.authorization;
 
@@ -29,6 +29,7 @@ export async function ensureAuthenticated(request: Request, response: Response, 
         };
 
         next();
+        
     } catch {
 
         throw new AppError(401, "Invalid token!");

@@ -1,5 +1,4 @@
-
-import { CoursesRepository } from "../../modules/courses/repositories/CourseRepository";
+import { CoursesRepository } from "../../repositories/CourseRepository";
 import { CreateCourseController } from "./createCourseController";
 import { CreateCourseUseCase } from "./createCourseUseCase";
 
