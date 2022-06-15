@@ -12,6 +12,15 @@ export class PermissionRepository implements IPermissionsRepository {
         this.repository = getRepository(Permission);
     }
 
+    async findByUserID(id: string): Promise<Permission[]> {
+        const rentals = await this.repository.find({
+            where: { id },
+            relations: ["users"],
+        });
+
+        return rentals;
+    }
+
     async findByIds(ids: string[]): Promise<Permission[]> {
 
         const permissions = await this.repository.findByIds(ids);

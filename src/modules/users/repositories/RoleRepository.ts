@@ -3,6 +3,7 @@ import { ICreateRoleDTO } from "../dto/ICreateRoleDTO";
 import { IRolesRepository } from "../dto/IRolesRepository";
 
 import { Role } from "../entities/Role";
+import { User } from "../entities/User";
 
 @EntityRepository(Role)
 export class RoleRepository implements IRolesRepository {
@@ -11,6 +12,19 @@ export class RoleRepository implements IRolesRepository {
 
     constructor() {
         this.repository = getRepository(Role);
+    }
+
+    async findByUserID(id: string): Promise<Role[]> {
+
+        const role = await this.repository.createQueryBuilder('roles')
+            .leftJoinAndSelect("roles", "user")
+            .where("bill.accountBill LIKE :id", { id })
+            .andWhere("user.id = :id", { id })
+            .select(["user.name", "user.surname"])
+            .execute();
+        
+
+        return role;
     }
 
     async findByIds(ids: string[]): Promise<Role[]> {
@@ -30,16 +44,16 @@ export class RoleRepository implements IRolesRepository {
         return user;
     }
 
-    async create( {description,name,permission}: ICreateRoleDTO): Promise<Role | Error> {
+    async create({ description, name, permission }: ICreateRoleDTO): Promise<Role | Error> {
 
         const role = this.repository.create({
             description,
             name,
             permission,
         });
-        
+
         await this.repository.save(role)
-        
+
         return role
     }
 }

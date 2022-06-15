@@ -43,9 +43,9 @@ export class User {
 
 	@ManyToMany(() => Role)
 	@JoinTable({
-	  name: "users_roles",
-	  joinColumns: [{ name: "user_id" }],
-	  inverseJoinColumns: [{ name: "role_id" }],
+		name: "users_roles",
+		joinColumns: [{ name: "user_id" }],
+		inverseJoinColumns: [{ name: "role_id" }],
 	})
 	roles: Role[];
 
@@ -53,7 +53,7 @@ export class User {
 	created_at: Date;
 
 	// @CreateDateColumn()
-    // updated_at: Date;
+	// updated_at: Date;
 
 	constructor() {
 		if (!this.id) {

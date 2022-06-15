@@ -4,6 +4,7 @@ import { User } from "../entities/User";
 import { IUsersRepository } from "../dto/IUsersRepository";
 import { Role } from "../entities/Role";
 import { IAssignRole } from "../dto/IAssignRole";
+import { Permission } from "../entities/Permission";
 
 
 @EntityRepository(User)
@@ -25,6 +26,15 @@ export class UserRepository implements IUsersRepository {
             .execute();
 
     }
+
+    // async findByUserID(id: string): Promise<User[]> {
+    //     const rentals = await this.repository.find({
+    //         where: { id },
+    //         relations: ["roles"],
+    //     });
+
+    //     return rentals;
+    // }
 
     async findById(id: string): Promise<User> {
 

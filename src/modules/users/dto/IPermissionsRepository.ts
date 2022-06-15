@@ -7,4 +7,5 @@ export interface IPermissionsRepository {
     create(data: ICreatePermissionDTO): Promise<Permission>;
     save(data: Permission): Promise<Permission>;
     findByIds(ids: string[]): Promise<Permission[]>;
+    findByUserID(id:string): Promise<Permission[]>
 }

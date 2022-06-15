@@ -1,8 +1,12 @@
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken"
 import auth from "../../config/auth";
+import { IPermissionsRepository } from "../../modules/users/dto/IPermissionsRepository";
+import { IRolesRepository } from "../../modules/users/dto/IRolesRepository";
 import { IUsersRepository } from "../../modules/users/dto/IUsersRepository";
 import { IUsersTokensRepository } from "../../modules/users/dto/IUserTokensRepository";
+import { Permission } from "../../modules/users/entities/Permission";
+import { Role } from "../../modules/users/entities/Role";
 import { AppError } from "../../shared/errors/AppError";
 import { IDateProvider } from "../../shared/providers/DataProvider/IDateProvider";
 
@@ -18,6 +22,7 @@ interface IResponse {
         id: string,
     },
     token: string;
+    roles: Role[]
     refresh_token: string;
 }
 
@@ -26,7 +31,9 @@ export class CreateSessionUseCase {
     constructor(
         private usersRepository: IUsersRepository,
         private usersTokensRepository: IUsersTokensRepository,
-        private dateProvider: IDateProvider
+        private dateProvider: IDateProvider,
+        private rolesRepository: IRolesRepository,
+        private permissionsRepository: IPermissionsRepository,
     ) { }
 
     async execute({ email, password }: IRequest): Promise<IResponse> {
@@ -63,6 +70,9 @@ export class CreateSessionUseCase {
             expires_date: refresh_token_expires_date,
         })
 
+        //Retrieve users' permissions
+        const roles = await this.rolesRepository.findByUserID(user.id);
+
         const tokenReturn: IResponse = {
             user: {
                 name: user.name,
@@ -70,8 +80,11 @@ export class CreateSessionUseCase {
                 id: user.id,
             },
             token,
+            roles,
             refresh_token,
         }
+
+
 
         return tokenReturn;
     }
