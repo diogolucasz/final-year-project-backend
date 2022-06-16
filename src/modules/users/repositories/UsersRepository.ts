@@ -16,6 +16,7 @@ export class UserRepository implements IUsersRepository {
         this.repository = getRepository(User);
     }
 
+
     async assignRole({ id, roles }: IAssignRole) {
 
         await this.repository
@@ -27,14 +28,16 @@ export class UserRepository implements IUsersRepository {
 
     }
 
-    // async findByUserID(id: string): Promise<User[]> {
-    //     const rentals = await this.repository.find({
-    //         where: { id },
-    //         relations: ["roles"],
-    //     });
+    async findRoleByUserID(id: string): Promise<any> {
 
-    //     return rentals;
-    // }
+        const user = await this.repository.findOne(
+            { id },
+            { relations: ["roles"] }
+        );
+
+        const roles = user.roles.map(role => role.name)
+        return roles;
+    }
 
     async findById(id: string): Promise<User> {
 

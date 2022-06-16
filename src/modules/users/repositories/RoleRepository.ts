@@ -14,18 +14,18 @@ export class RoleRepository implements IRolesRepository {
         this.repository = getRepository(Role);
     }
 
-    async findByUserID(id: string): Promise<Role[]> {
+    // async findByUserID(id: string): Promise<Role[]> {
 
-        const role = await this.repository.createQueryBuilder('roles')
-            .leftJoinAndSelect("roles", "user")
-            .where("bill.accountBill LIKE :id", { id })
-            .andWhere("user.id = :id", { id })
-            .select(["user.name", "user.surname"])
-            .execute();
+    //     const role = await this.repository.createQueryBuilder('roles')
+    //         .leftJoinAndSelect("roles", "user")
+    //         .where("bill.accountBill LIKE :id", { id })
+    //         .andWhere("user.id = :id", { id })
+    //         .select(["user.name", "user.surname"])
+    //         .execute();
         
 
-        return role;
-    }
+    //     return role;
+    // }
 
     async findByIds(ids: string[]): Promise<Role[]> {
 

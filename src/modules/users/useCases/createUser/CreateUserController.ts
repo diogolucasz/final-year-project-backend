@@ -1,4 +1,3 @@
-//import { CreateUserUseCase } from "./CreateUserUseCase";
 import { Request, Response } from "express";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 

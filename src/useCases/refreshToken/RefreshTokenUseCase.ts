@@ -1,5 +1,6 @@
 import { verify, sign } from "jsonwebtoken";
 import auth from "../../config/auth";
+import { IUsersRepository } from "../../modules/users/dto/IUsersRepository";
 import { IUsersTokensRepository } from "../../modules/users/dto/IUserTokensRepository";
 import { AppError } from "../../shared/errors/AppError";
 import { IDateProvider } from "../../shared/providers/DataProvider/IDateProvider";
@@ -18,6 +19,7 @@ export class RefreshTokenUseCase {
 
     constructor(
         private usersTokensRepository: IUsersTokensRepository,
+        private usersRepository: IUsersRepository,
         private dateProvider: IDateProvider
     ) { }
 
@@ -35,7 +37,11 @@ export class RefreshTokenUseCase {
 
         await this.usersTokensRepository.deleteById(userToken.id)
 
-        const refresh_token = sign({ email }, auth.secret_refresh_token, {
+        const roles = await this.usersRepository.findRoleByUserID(user_id);
+
+        console.log(roles)
+
+        const refresh_token = sign({ email, roles }, auth.secret_refresh_token, {
             subject: user_id,
             expiresIn: auth.expires_in_refresh_token,
         });
@@ -53,6 +59,7 @@ export class RefreshTokenUseCase {
         const regenerated_token = sign({}, auth.secret_token, {
             subject: user_id,
             expiresIn: auth.expires_in_token,
+            //roles
         });
 
         return {

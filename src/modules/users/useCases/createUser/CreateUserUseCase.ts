@@ -1,7 +1,8 @@
-import { ICreateUserDTO } from "../../modules/users/dto/ICreateUserDTO";
 import { hash } from "bcryptjs";
-import { IUsersRepository } from "../../modules/users/dto/IUsersRepository";
-import { AppError } from "../../shared/errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
+import { ICreateUserDTO } from "../../dto/ICreateUserDTO";
+import { IUsersRepository } from "../../dto/IUsersRepository";
+
 
 export class CreateUserUseCase {
 

@@ -1,13 +1,13 @@
-import { UserRepository } from "../../modules/users/repositories/UsersRepository";
+import { UserRepository } from "../../repositories/UsersRepository";
 import { CreateUserController } from "./CreateUserController";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
 
-export default (): CreateUserController => {
+export default (): GetUserInfoController => {
     
     const usersRepository = new UserRepository();
 
-    const createUserUseCase = new CreateUserUseCase(
+    const getUserInfoUseCase = new GetUserInfoUseCase(
         usersRepository
     )
 
@@ -15,5 +15,5 @@ export default (): CreateUserController => {
         createUserUseCase
     )
 
-    return createUserController;
+    return getUserInfoController;
 }
