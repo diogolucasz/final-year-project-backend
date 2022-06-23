@@ -1,9 +1,11 @@
 import { Router } from 'express';
 
-import createUserController from '../useCases/createUser';
+import createUserController from '../modules/users/useCases/createUser';
 import createPermissionController from '../modules/users/useCases/createPermission';
 import createRouteController from '../useCases/createRole';
+import getUserInfoController from '../modules/users/useCases/getUserInfo';
 import assignRole from '../useCases/assignRole';
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 
 export const usersRoutes = Router();
@@ -22,4 +24,8 @@ usersRoutes.post("/roles", (request, response) => {
 
 usersRoutes.post("/assignRole", (request, response) => {
     return assignRole().handle(request, response)
+});
+
+usersRoutes.get("/me", ensureAuthenticated, (request, response) => {
+    return getUserInfoController().handle(request, response)
 });

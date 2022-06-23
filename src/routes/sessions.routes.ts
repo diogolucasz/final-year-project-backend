@@ -9,6 +9,6 @@ sessionsRoutes.post("/sessions", (request, response) => {
     return createSessionController().handle(request, response)
 });
 
-sessionsRoutes.post("/refresh-token", ensureAuthenticated,(request, response) => {
+sessionsRoutes.post("/refresh-token",(request, response) => {
     return refreshTokenController().handle(request, response)
 });

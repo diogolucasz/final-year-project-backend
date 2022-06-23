@@ -27,7 +27,7 @@ export class RefreshTokenUseCase {
 
         const { email, sub: user_id } = verify(token, auth.secret_refresh_token) as IPayLoad;
 
-        //const user_id = sub;
+        // console.log(token, email,user_id)
 
         const userToken = await this.usersTokensRepository.findByUserId(user_id, token)
 
@@ -39,7 +39,7 @@ export class RefreshTokenUseCase {
 
         const roles = await this.usersRepository.findRoleByUserID(user_id);
 
-        console.log(roles)
+        // console.log(roles)
 
         const refresh_token = sign({ email, roles }, auth.secret_refresh_token, {
             subject: user_id,

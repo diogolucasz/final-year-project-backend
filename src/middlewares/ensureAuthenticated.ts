@@ -19,6 +19,8 @@ export async function ensureAuthenticated(request: Request | any, response: Resp
 
     try {
 
+        // console.log(token)
+
         const { sub: user_id } = verify(
             token,
             auth.secret_token
