@@ -5,13 +5,9 @@ import { IUsersRepository } from "../../dto/IUsersRepository";
 import { Role } from "../../entities/Role";
 
 interface IResponse {
-    // user: {
-        name: string,
-        email: string,
-        id: string,
-    // },
-    // refresh_token: string;
-    // token: string;
+    name: string,
+    email: string,
+    id: string,
     roles: Role[]
 }
 
@@ -21,7 +17,7 @@ export class GetUserInfoUseCase {
         private usersRepository: IUsersRepository,
     ) { }
 
-    async execute({id}): Promise<IResponse> {
+    async execute({ id }): Promise<IResponse> {
 
         const user = await this.usersRepository.findById(id);
 
@@ -48,14 +44,14 @@ export class GetUserInfoUseCase {
 
         return {
             // user: {
-                name: user.name,
-                email: user.email,
-                id: user.id,
+            name: user.name,
+            email: user.email,
+            id: user.id,
             // },
 
             roles,
         };
-        
+
     }
 }
 
