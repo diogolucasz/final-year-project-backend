@@ -4,8 +4,8 @@ import createUserController from '../modules/users/useCases/createUser';
 import createPermissionController from '../modules/users/useCases/createPermission';
 import createRouteController from '../useCases/createRole';
 import getUserInfoController from '../modules/users/useCases/getUserInfo';
-import assignRole from '../useCases/assignRole';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
+import assignRole from '../modules/users/useCases/assignRole';
 
 
 export const usersRoutes = Router();

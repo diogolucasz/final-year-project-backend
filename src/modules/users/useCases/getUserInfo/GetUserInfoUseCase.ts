@@ -48,7 +48,6 @@ export class GetUserInfoUseCase {
             email: user.email,
             id: user.id,
             // },
-
             roles,
         };
 

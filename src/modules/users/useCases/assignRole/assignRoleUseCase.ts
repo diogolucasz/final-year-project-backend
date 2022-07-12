@@ -1,12 +1,11 @@
-import { IRolesRepository } from "../../modules/users/dto/IRolesRepository";
-import { IUsersRepository } from "../../modules/users/dto/IUsersRepository";
-import { AppError } from "../../shared/errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
+import { IRolesRepository } from "../../dto/IRolesRepository";
+import { IUsersRepository } from "../../dto/IUsersRepository";
 
 interface IRequest {
     id: string;
     roles: string[];
 };
-
 
 export class AssignRoleUserCase {
 

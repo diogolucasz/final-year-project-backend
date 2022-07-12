@@ -1,5 +1,7 @@
-import { RoleRepository } from "../../modules/users/repositories/RoleRepository";
-import { UserRepository } from "../../modules/users/repositories/UsersRepository";
+
+import { RoleRepository } from "../../repositories/RoleRepository";
+import { UserRepository } from "../../repositories/UsersRepository";
+
 import { AssignRoleController } from "./assignRoleController";
 import { AssignRoleUserCase } from "./assignRoleUseCase";
 

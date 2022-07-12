@@ -23,7 +23,7 @@ export class PostsRepository implements IPostsRepository {
 
     //
     // async create(post: ICreatePostDTO): Promise<Post> {
-        
+
     //     return this.repository.save(post);
 
     // }
@@ -43,12 +43,14 @@ export class PostsRepository implements IPostsRepository {
 
     //     return post;
     // }
-    
+
     //
     async list(): Promise<Post[]> {
-        
-        const posts = await this.repository.find()
 
+        const posts = await this.repository.find({
+            relations: ['user']
+        })
+        
         return posts;
     }
 

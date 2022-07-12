@@ -37,5 +37,13 @@ export class CoursesRepository implements ICoursesRepository {
 
         return course;
     }
+
+    //
+    async list(): Promise<Course[]> {
+        
+        const courses = await this.repository.find()
+
+        return courses;
+    }
 }
 

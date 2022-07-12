@@ -15,13 +15,13 @@ export class Post {
     @Column()
     message: string;
 
-    @Column()
-    user_id: string;
-
+    
     @ManyToOne(() => User)
     @JoinColumn({ name: 'user_id' })
     user: User;
-
+    
+    @Column()
+    user_id: string;
     // @OneToMany(() => ClassSchedule {
     //     cascade: ['insert'],
     // })

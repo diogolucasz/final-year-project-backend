@@ -3,6 +3,7 @@ import { CreateCourseController } from "./createCourseController";
 import { CreateCourseUseCase } from "./createCourseUseCase";
 
 export default (): CreateCourseController => {
+    
     const courseRepository = new CoursesRepository();
 
     const createCourseUseCase = new CreateCourseUseCase(

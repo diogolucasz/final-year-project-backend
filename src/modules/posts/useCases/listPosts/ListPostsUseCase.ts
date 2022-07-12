@@ -9,8 +9,11 @@ export class ListPostsUseCase {
     ) { }
 
     async execute(): Promise<Post[]> {
-        const categories = await this.postsRepository.list();
 
-        return categories;
+        const posts = await this.postsRepository.list();
+
+        
+
+        return posts;
     }
 }
