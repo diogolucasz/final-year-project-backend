@@ -13,11 +13,10 @@ interface IRequest {
 }
 
 interface IResponse {
-    // user: {
-        name: string,
-        email: string,
-        id: string,
-    // },
+    name: string,
+    email: string,
+    id: string,
+    surname: string,
     token: string;
     refresh_token: string;
     roles: Role[]
@@ -70,18 +69,15 @@ export class CreateSessionUseCase {
         // Retrieve users' permissions
 
         const tokenReturn: IResponse = {
-            // user: {
-                name: user.name,
-                email: user.email,
-                id: user.id,
-            // },
+            id: user.id,
+            name: user.name,
+            surname: user.surname,
+            email: user.email,
             token,
             roles,
             refresh_token,
         }
-
-
-
+        
         return tokenReturn;
     }
 }

@@ -6,6 +6,7 @@ import { Role } from "../../entities/Role";
 
 interface IResponse {
     name: string,
+    surname: string,
     email: string,
     id: string,
     roles: Role[]
@@ -45,6 +46,8 @@ export class GetUserInfoUseCase {
         return {
             // user: {
             name: user.name,
+            surname: user.surname,
+            // course: user.course,
             email: user.email,
             id: user.id,
             // },
