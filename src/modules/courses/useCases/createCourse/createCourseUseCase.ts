@@ -1,7 +1,6 @@
 import { AppError } from "../../../../shared/errors/AppError";
 import { ICoursesRepository } from "../../dto/ICourseRepository";
 
-
 interface CourseRequest {
     name: string;
     description: string;

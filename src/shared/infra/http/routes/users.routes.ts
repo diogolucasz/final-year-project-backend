@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
-import createUserController from '../modules/users/useCases/createUser';
-import createPermissionController from '../modules/users/useCases/createPermission';
-import createRouteController from '../useCases/createRole';
-import getUserInfoController from '../modules/users/useCases/getUserInfo';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
-import assignRole from '../modules/users/useCases/assignRole';
 
+import createUserController from '../../../../modules/users/useCases/createUser';
+import createPermissionController from '../../../../modules/users/useCases/createPermission';
+import createRouteController from '../../../../modules/users/useCases/createRole';
+import assignRole from '../../../../modules/users/useCases/assignRole';
+import getUserInfoController from '../../../../modules/users/useCases/getUserInfo';
 
 export const usersRoutes = Router();
 

@@ -2,11 +2,13 @@ import 'reflect-metadata';
 import "express-async-errors"
 
 import express, { NextFunction, Response, Request } from 'express';
-import { routes } from "./routes";
-import { AppError } from './shared/errors/AppError';
+
+import { AppError } from '../../errors/AppError';
 import cors from 'cors'
 
-import './database';
+import '../typeorm';
+import { routes } from './routes';
+
 
 const app = express();
 

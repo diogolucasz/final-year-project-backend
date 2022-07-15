@@ -1,7 +1,5 @@
-
-import { Repository } from "typeorm";
-import { PermissionRepository } from "../../modules/users/repositories/PermissionRepository";
-import { RoleRepository } from "../../modules/users/repositories/RoleRepository";
+import { RoleRepository } from "../../repositories/RoleRepository";
+import { PermissionRepository } from "../../repositories/PermissionRepository";
 import { CreateRoleController } from "./createRoleController";
 import { CreateRoleUserCase } from "./createRoleUseCase";
 

@@ -1,11 +1,14 @@
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken"
-import auth from "../../config/auth";
-import { IUsersRepository } from "../../modules/users/dto/IUsersRepository";
-import { IUsersTokensRepository } from "../../modules/users/dto/IUserTokensRepository";
-import { Role } from "../../modules/users/entities/Role";
-import { AppError } from "../../shared/errors/AppError";
-import { IDateProvider } from "../../shared/providers/DataProvider/IDateProvider";
+
+import auth from "../../../../config/auth";
+
+
+import { IDateProvider } from "../../../../shared/providers/DataProvider/IDateProvider";
+import { IUsersRepository } from "../../dto/IUsersRepository";
+import { IUsersTokensRepository } from "../../dto/IUserTokensRepository";
+import { Role } from "../../entities/Role";
+import { AppError } from "../../../../shared/errors/AppError";
 
 interface IRequest {
     email: string,
@@ -77,7 +80,7 @@ export class CreateSessionUseCase {
             roles,
             refresh_token,
         }
-        
+
         return tokenReturn;
     }
 }

@@ -8,7 +8,6 @@ export class GetUserInfoController {
 
     async handle(request: Request | any, response: Response): Promise<Response> {
 
-
         const { id } = request.user;
 
         const user = await this.getUserInfoUseCase.execute({id})

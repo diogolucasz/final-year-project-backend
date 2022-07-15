@@ -1,4 +1,5 @@
-import { Course } from "../courses/entities/Course";
+
+import { Course } from "../entities/Course";
 import { ICreateCourseDTO } from "./ICreateCourseDTO";
 
 export interface ICoursesRepository {

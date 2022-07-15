@@ -1,7 +1,9 @@
 import { Router } from "express";
-import listPostsController from '../modules/posts/useCases/listPosts';
-import createPostController from '../modules/posts/useCases/createPost';
-import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
+
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
+
+import listPostsController from '../../../../modules/posts/useCases/listPosts';
+import createPostController from '../../../../modules/posts/useCases/createPost';
 
 export const postsRoutes = Router();
 

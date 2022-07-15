@@ -6,8 +6,6 @@ import { usersRoutes } from "./users.routes";
 
 export const routes = Router();
 
-
-
 routes.use("/users", usersRoutes);
 routes.use("/courses", coursesRoutes);
 routes.use("/posts", postsRoutes)

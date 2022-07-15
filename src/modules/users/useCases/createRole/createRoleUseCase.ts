@@ -1,7 +1,7 @@
-import { IPermissionsRepository } from "../../modules/users/dto/IPermissionsRepository";
-import { IRolesRepository } from "../../modules/users/dto/IRolesRepository";
-import { Role } from "../../modules/users/entities/Role";
-import { AppError } from "../../shared/errors/AppError";
+import { IRolesRepository } from "../../dto/IRolesRepository";
+import { IPermissionsRepository } from "../../dto/IPermissionsRepository";
+import { Role } from "../../entities/Role";
+import { AppError } from "../../../../shared/errors/AppError";
 
 interface IRequest {
     name: string;

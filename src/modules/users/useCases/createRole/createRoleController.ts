@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { CreateRoleUserCase } from "./createRoleUseCase";
 
-
 export class CreateRoleController {
 
     constructor(
@@ -15,6 +14,5 @@ export class CreateRoleController {
         const role = await this.createRoleUserCase.execute({ name, description, permissions });
 
         return response.json(role);
-
     }
 }
