@@ -7,6 +7,7 @@ import createPermissionController from '../../../../modules/users/useCases/creat
 import createRouteController from '../../../../modules/users/useCases/createRole';
 import assignRole from '../../../../modules/users/useCases/assignRole';
 import getUserInfoController from '../../../../modules/users/useCases/getUserInfo';
+import getUserProfileUseCase from '../../../../modules/users/useCases/getUserProfile'
 
 export const usersRoutes = Router();
 
@@ -29,3 +30,7 @@ usersRoutes.post("/assignRole", (request, response) => {
 usersRoutes.get("/me", ensureAuthenticated, (request, response) => {
     return getUserInfoController().handle(request, response)
 });
+
+usersRoutes.get("/profile",( request, response) => {
+    return getUserProfileUseCase().handle(request, response)
+})

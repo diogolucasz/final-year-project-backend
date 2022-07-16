@@ -10,4 +10,5 @@ export interface IUsersRepository {
     findById(id: string): Promise<User>;
     assignRole(data: IAssignRole): Promise<void>;
     findRoleByUserID(id: string): Promise<any>
+    getProfileById(id: string): Promise<any>
 }

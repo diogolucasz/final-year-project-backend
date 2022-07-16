@@ -1,10 +1,12 @@
 import { EntityRepository, getRepository, Repository } from "typeorm";
 import { ICreateUserDTO } from "../dto/ICreateUserDTO";
-import { User } from "../entities/User";
+import { User } from "../../../modules/users/entities/User";
 import { IUsersRepository } from "../dto/IUsersRepository";
 import { Role } from "../entities/Role";
 import { IAssignRole } from "../dto/IAssignRole";
 import { Permission } from "../entities/Permission";
+import { getConnection } from "typeorm";
+import { Post } from "../../../modules/posts/entities/Post";
 
 
 @EntityRepository(User)
@@ -26,6 +28,21 @@ export class UserRepository implements IUsersRepository {
             .where("id = :id", { id })
             .execute();
 
+    }
+
+    async getProfileById(id: string) {
+
+        const user = await getConnection()
+            .createQueryBuilder()
+            .select(["users","posts"])
+            .from(User, "users")
+            //.from(Post, "posts")
+            .where("users.id = :id", { id })
+            .andWhere("posts.user_id = :id", {id})
+            .innerJoin(Post,"posts")
+            .getMany();
+
+        return user
     }
 
     async findRoleByUserID(id: string): Promise<any> {
