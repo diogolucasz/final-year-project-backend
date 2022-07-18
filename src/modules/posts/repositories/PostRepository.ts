@@ -13,6 +13,35 @@ export class PostsRepository implements IPostsRepository {
     }
 
     //
+    // async findAvailiblePosts(username?: string, course?: string):Promise<Post> {
+
+    // }
+
+    async findAvailiblePosts(
+        subject?: string,
+        username?: string,
+        course_id?: string,
+      ): Promise<Post[]> {
+
+        const postsQuery = this.repository
+        .createQueryBuilder("SELECT * FROM POSTS, USERS")
+       
+        if (username) {
+            postsQuery.andWhere("users.username = :username", { username });
+        }
+        if (course_id) {
+            postsQuery.andWhere("users.course_id = :course_id", { course_id });
+        }
+        if (subject) {
+            postsQuery.andWhere("posts.subject = :subject", { subject });
+        }
+    
+        const posts = await postsQuery.getMany();
+    
+        return posts;
+    }
+
+    //
     async create(data: ICreatePostDTO): Promise<Post> {
 
         const post = this.repository.create(data);

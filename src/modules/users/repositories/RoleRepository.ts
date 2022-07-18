@@ -43,4 +43,5 @@ export class RoleRepository implements IRolesRepository {
 
         return role
     }
+    
 }
