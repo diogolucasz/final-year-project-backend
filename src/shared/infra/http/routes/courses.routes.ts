@@ -9,11 +9,11 @@ import listCoursesController from '../../../../modules/courses/useCases/listCour
 
 export const coursesRoutes = Router();
 
-coursesRoutes.use(ensureAuthenticated)
-// is(["TEdSTE"])
-coursesRoutes.post("/", ensureAuthenticated, (request: any, response) => {
+
+coursesRoutes.post("/", ensureAuthenticated, is(["ADMIN"]), (request: any, response) => {
     return createCourseController().handle(request, response)
 });
+
 
 coursesRoutes.use(ensureAuthenticated)
 coursesRoutes.get("/", (request: any, response) => {

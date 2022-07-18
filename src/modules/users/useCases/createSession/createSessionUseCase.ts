@@ -61,6 +61,7 @@ export class CreateSessionUseCase {
             expiresIn: expires_in_refresh_token,
         })
 
+        
         const refresh_token_expires_date = this.dateProvider.addDays(expires_refresh_token_days);
 
         await this.usersTokensRepository.create({
@@ -68,8 +69,6 @@ export class CreateSessionUseCase {
             refresh_token,
             expires_date: refresh_token_expires_date,
         })
-
-        // Retrieve users' permissions
 
         const tokenReturn: IResponse = {
             id: user.id,

@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { decode } from "jsonwebtoken";
-import { User } from "src/modules/users/entities/User";
-import { UserRepository } from "src/modules/users/repositories/UsersRepository";
-import { AppError } from "src/shared/errors/AppError";
+import { User } from "../../../../modules/users/entities/User";
+import { UserRepository } from "../../../../modules/users/repositories/UsersRepository";
+import { AppError } from "../../../../shared/errors/AppError";
 import { getCustomRepository } from "typeorm";
 
 async function tokenDecoder(request: Request): Promise<User | undefined> {
