@@ -36,7 +36,6 @@ export class UserRepository implements IUsersRepository {
             .createQueryBuilder()
             .select(["users","posts"])
             .from(User, "users")
-            //.from(Post, "posts")
             .where("users.id = :id", { id })
             .andWhere("posts.user_id = :id", {id})
             .innerJoin(Post,"posts")

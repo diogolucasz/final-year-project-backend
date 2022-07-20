@@ -25,15 +25,11 @@ export class CreatePostUseCase {
             throw new AppError(400, `User does not exists`)
         }
 
-        console.log(user)
-
         const post = this.postsRepository.create({
             user_id,
             message,
             subject
         });
-
-        console.log(post)
 
         await this.postsRepository.save(await post);
 

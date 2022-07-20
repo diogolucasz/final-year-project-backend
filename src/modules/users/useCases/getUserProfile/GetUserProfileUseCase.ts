@@ -7,6 +7,8 @@ interface IResponse {
     //userProfile: User
 }
 
+import { ERROR } from "./Errors";
+
 export class GetUserProfileUseCase {
 
     constructor(
@@ -18,7 +20,7 @@ export class GetUserProfileUseCase {
         const user = await this.usersRepository.findById(id);
 
         if (!user) {
-            throw new AppError(400, "User does not exists");
+            throw new AppError(400, ERROR.USER_DOES_NOT_EXISTS);
         }
 
         // const passwordHashed = await hash(password, 8)

@@ -32,8 +32,7 @@ export async function ensureAuthenticated(request: Request | any, response: Resp
         next();
 
     } catch {
-
         throw new AppError(401, "Invalid token!");
-
     }
+
 }

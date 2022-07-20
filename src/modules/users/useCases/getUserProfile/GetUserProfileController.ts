@@ -6,7 +6,7 @@ export class GetUserProfileController {
         private getUserProfileUseCase: GetUserProfileUseCase
     ) { }
 
-    async handle(request: Request | any, response: Response): Promise<Response> {
+    async handle(request: Request | any, response: any): Promise<Response> {
 
         const { id } = request.query;
 
@@ -15,3 +15,4 @@ export class GetUserProfileController {
         return response.json(user);
     }
 }
+

@@ -13,15 +13,11 @@ export class CreatePostController {
         const { id } = request.user;
         const { subject, message } = request.body;
         
-        //console.log(request.user, request.body)
-
         const post = await this.createPostUseCase.execute({
             user_id: id,
             message,
             subject,
         });
-
-        console.log(post)
 
         return response.json(post);
     }

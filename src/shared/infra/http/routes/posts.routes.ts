@@ -11,7 +11,7 @@ postsRoutes.get("/", (request, response) => {
     return listPostsController().handle(request, response)
 });
 
-//postsRoutes.use(ensureAuthenticated)
+postsRoutes.use(ensureAuthenticated)
 postsRoutes.post("/", ensureAuthenticated, (request, response) => {
     return createPostController().handle(request, response)
 });

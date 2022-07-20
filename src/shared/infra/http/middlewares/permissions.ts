@@ -17,20 +17,22 @@ async function tokenDecoder(request: Request): Promise<User | undefined> {
 
     const user = await userRepository.findBySubject(payload?.sub)
 
+    console.log(user)
+
     return user;
 }
 
-export function is(role: String[]) {
+export function is(rolesRoutes: String[]) {
 
     const roleAuthorized = async (request: Request, response: Response, next: NextFunction) => {
 
         const user = await tokenDecoder(request)
 
-        const userRoles = user.roles.map(role => role.name)
+        const matchingRoles = user.roles
+            .map((role) => role.name)
+            .some((role) => rolesRoutes.includes(role));
 
-        const existingRoles = userRoles.some(r => role.includes(r))
-
-        if (existingRoles) {
+        if (matchingRoles) {
             return next();
         }
 
